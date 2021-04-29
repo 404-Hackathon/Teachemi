@@ -8,9 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var textFieldInput = ""
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        NavigationView {
+            VStack {
+                TextField("search element", text: $textFieldInput).padding()
+                List(elements, id: \.self) { element in
+                    HStack {
+                        Image(element.name)
+                            .resizable()
+                            .frame(width: 100, height: 100, alignment: .center)
+                            .scaledToFill()
+                        Text(element.name)
+                    }
+                }
+            }.navigationTitle("Elements")
+        }
     }
 }
 
