@@ -9,17 +9,20 @@ import SwiftUI
 
 struct ContentView: View {
     @State var textFieldInput = ""
+    @State var isSearching = false
+    @State var list = elements
     var body: some View {
         NavigationView {
             VStack {
                 TextField("search element", text: $textFieldInput).padding()
-                List(elements, id: \.self) { element in
-                    HStack {
-                        Image(element.name)
-                            .resizable()
-                            .frame(width: 100, height: 100, alignment: .center)
-                            .scaledToFill()
-                        Text(element.name)
+                List(elements.filter({
+                    "\($0)".contains(textFieldInput) ||
+                        textFieldInput.isEmpty ||
+                        textFieldInput.isEmpty ? true :
+                        "\($0)".lowercased().contains(textFieldInput.lowercased())
+                }), id: \.self) { element in
+                    NavigationLink(destination: ElementDetails(element: element)) {
+                        ElementRow(element: element)
                     }
                 }
             }.navigationTitle("Elements")
@@ -32,3 +35,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
