@@ -9,12 +9,15 @@ import SwiftUI
 
 struct ContentView: View {
     @State var textFieldInput = ""
-    @State var isSearching = false
-    @State var list = elements
     var body: some View {
         NavigationView {
             VStack {
-                TextField("search element", text: $textFieldInput).padding()
+                HStack {
+                    Image(systemName: "1.magnifyingglass")
+                        .padding(.leading)
+                        .foregroundColor(.gray)
+                    TextField("search element", text: $textFieldInput).padding()
+                }
                 List(elements.filter({
                     "\($0)".contains(textFieldInput) ||
                         textFieldInput.isEmpty ||
@@ -26,7 +29,7 @@ struct ContentView: View {
                     }
                 }
             }.navigationTitle("Elements")
-        }
+        }.accentColor(Color(#colorLiteral(red: 0.8588235294, green: 0.5998145082, blue: 0.561995576, alpha: 1)))
     }
 }
 

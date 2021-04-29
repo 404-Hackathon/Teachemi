@@ -10,24 +10,39 @@ import SwiftUI
 struct ElementDetails: View {
     let element: Element
     var body: some View {
-        VStack {
+        ZStack {
             Image(element.name)
                 .resizable()
-                .frame(width: 250, height: 250, alignment: .center)
                 .scaledToFill()
-                .cornerRadius(20)
-                .padding()
+                .ignoresSafeArea()
+                .blur(radius: 20)
             VStack {
-                Text(element.symbol)
-                    .bold()
-                    .font(.largeTitle)
-                Text(element.name)
+                Spacer()
+                Image(element.name)
+                    .resizable()
+                    .frame(width: 250, height: 250, alignment: .center)
+                    .scaledToFill()
+                    .cornerRadius(20)
+                    .shadow(radius: 15)
+                    .padding()
+                VStack {
+                    Text(element.symbol)
+                        .bold()
+                        .font(.largeTitle)
+                    Text(element.name)
+                        .font(.title)
+                }
+                .padding()
+                Text("Atomic Number: \(element.atomicNum)")
                     .font(.title)
-            }.padding()
-            Text("Atomic Number: \(element.atomicNum)")
-                .font(.title)
-            Text(String(format: "%.3f", element.mass))
-                .font(.title)
+                Text(String(format: "%.3f", element.mass))
+                    .font(.title)
+                Spacer()
+                Text("Element Number \(element.atomicNum)!")
+                    .font(.largeTitle).bold()
+                Spacer()
+                Spacer()
+            }
         }
     }
 }

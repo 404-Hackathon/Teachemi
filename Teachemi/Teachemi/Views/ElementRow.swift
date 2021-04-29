@@ -15,11 +15,13 @@ struct ElementRow: View {
                 .resizable()
                 .frame(width: 100, height: 100, alignment: .center)
                 .cornerRadius(20)
-                .scaledToFill()
+                .scaledToFit()
                 .padding()
+                .shadow(radius: 10)
             Text(element.name)
                 .bold()
                 .font(.title)
+                .foregroundColor(Color(#colorLiteral(red: 0.4341446143, green: 0.446670065, blue: 0.8549019608, alpha: 1)))
         }
     }
 }
